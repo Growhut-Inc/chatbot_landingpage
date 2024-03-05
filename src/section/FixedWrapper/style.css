@@ -1,0 +1,28 @@
+.section_bg_wrapper {
+  height: 100vh;
+}
+
+.section_bg_wrapper .section1 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  /* border: 1px solid green; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.section_bg_wrapper .section1 .lottie_fixed {
+  width: 50%;
+}
+.section_bg_wrapper .section1 h4 {
+  opacity: 0;
+  max-width: 600px;
+  text-align: center;
+}
+.section_bg_wrapper .lottie_fixed {
+  width: 50%;
+  height: 50%;
+}
