@@ -1,10 +1,11 @@
 "use client";
-
 import React, { useEffect } from "react";
-import "./style.css";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/dist/ScrollTrigger";
-import AnimatedLoader from "../demo/AnimateLoader";
+import AnimatedLoader from "../LottieAnimation/AnimateLoader";
+import "./style.css";
+import SlideCounter from "../SlideCounter/SlideCounter";
+import Navbar from "../Navbar/Navbar";
 
 const FixedSection = () => {
 	useEffect(() => {
@@ -24,12 +25,12 @@ const FixedSection = () => {
 		const contentAnimationDuration =
 			animationDuration / contentSelectors.length;
 
-		console.log(contentAnimationDuration, "contentAnimationDuration");
+		// console.log(contentAnimationDuration, "contentAnimationDuration");
 
 		const timeline = gsap.timeline({
 			scrollTrigger: {
 				trigger: "#animation",
-				start: "top 20%",
+				start: "top center",
 				end: () => `+=${animationDuration}`,
 				scrub: true,
 				// markers: true,
@@ -37,9 +38,6 @@ const FixedSection = () => {
 		});
 
 		timeline
-			.from(contentSelectors[0], {
-				opacity: 0,
-			})
 			.to(contentSelectors[0], {
 				opacity: 1,
 				scale: 1.1,
@@ -73,7 +71,7 @@ const FixedSection = () => {
 			})
 			.to(contentSelectors[3], {
 				opacity: 1,
-				y: -30,
+				y: -20,
 				scale: 1.1,
 				duration: contentAnimationDuration,
 			})
@@ -116,12 +114,14 @@ const FixedSection = () => {
 				<div className="content_wrapper">
 					<div className="content1">
 						<div className="text_wrapper">
-							<h4>
-								"Get closer than ever to your customers. So
-								close, in fact, that you tell them what they
-								need well before they realize it themselves."
-							</h4>
+							<h6>
+								"Get closer than ever to your customers.
+								<br /> So close, in fact, that you tell them
+								what they need well before they realize it
+								themselves."
+							</h6>
 							<p>- Steve Jobs</p>
+							<SlideCounter count={"1/8"} />
 						</div>
 					</div>
 					<div className="content2">
@@ -133,6 +133,8 @@ const FixedSection = () => {
 								more than a balance; it's an art, crucial for
 								growth and thriving in today's market.
 							</p>
+
+							<SlideCounter count={"2/8"} />
 						</div>
 					</div>
 					<div className="content3">
@@ -144,6 +146,8 @@ const FixedSection = () => {
 								it's a revolution in customer relationships.
 								Let's dive into how it transforms your business.
 							</p>
+
+							<SlideCounter count={"3/8"} />
 						</div>
 					</div>
 					<div className="content4">
@@ -156,6 +160,8 @@ const FixedSection = () => {
 								them, every client has a compelling reason to
 								keep coming back.
 							</p>
+
+							<SlideCounter count={"4/8"} />
 						</div>
 					</div>
 					<div className="content5">
@@ -171,6 +177,8 @@ const FixedSection = () => {
 								touchpoint into an opportunity for growth and
 								connection.
 							</p>
+
+							<SlideCounter count={"5/8"} />
 						</div>
 					</div>
 					<div className="content6">
@@ -183,6 +191,8 @@ const FixedSection = () => {
 								satisfied, loyal customers, smoothly navigating
 								through your sales funnel.
 							</p>
+
+							<SlideCounter count={"6/8"} />
 						</div>
 					</div>
 					<div className="content7">
@@ -197,6 +207,8 @@ const FixedSection = () => {
 								This intelligence is what puts you ahead, always
 								one step ahead in your market.
 							</p>
+
+							<SlideCounter count={"7/8"} />
 						</div>
 					</div>
 				</div>

@@ -1,0 +1,24 @@
+.slide_count {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	animation: arrow 2.5s ease-in-out infinite;
+	font-weight: 200;
+	font-size: 15px;
+	margin-top: 1rem;
+}
+.slide_count .img_wrapper {
+	filter: drop-shadow(0px 0px 6px #fff);
+}
+@keyframes arrow {
+	0% {
+		transform: translateY(0);
+	}
+	50% {
+		transform: translateY(10px);
+	}
+	100% {
+		transform: translateY(0);
+	}
+}

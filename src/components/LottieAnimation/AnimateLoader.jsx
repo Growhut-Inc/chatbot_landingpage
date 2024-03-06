@@ -1,5 +1,5 @@
 "use client";
-import { Controls, Player } from "@lottiefiles/react-lottie-player";
+import { Player } from "@lottiefiles/react-lottie-player";
 import React, { useState, useRef, useEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -26,15 +26,15 @@ export default function AnimatedLoader() {
 
 		const onUpdate = (self) => {
 			const progress = self.progress;
-			console.log(progress, "progress");
+			// console.log(progress, "progress");
 			const currentFrame = Math.round(instance.totalFrames * progress);
 			instance.goToAndStop(currentFrame, true);
 
-			if (progress === 1) {
-				playerRef.current.setSeeker("100%");
-			}
+			// if (progress === 1) {
+			// 	playerRef.current.setSeeker("100%");
+			// }
 			const animationHeight = instance.totalFrames * 5;
-			console.log(animationHeight, "animationHeight");
+			// console.log(animationHeight, "animationHeight");
 			document.body.style.height = `${animationHeight - 2200}px`;
 		};
 
@@ -57,8 +57,7 @@ export default function AnimatedLoader() {
 			id="animation"
 			ref={animationRef}
 			style={{
-				// border: "1px solid red",
-				width: "50%",
+				width: "46%",
 				height: "max-content",
 			}}
 		>
@@ -67,7 +66,7 @@ export default function AnimatedLoader() {
 					setInstance(ins);
 				}}
 				autoplay={false}
-				setSeeker={"10%"}
+				setSeeker={"100%"}
 				loop={false}
 				controls={true}
 				src={animation}
