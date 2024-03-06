@@ -116,11 +116,7 @@ a {
   gap: 5rem;
   border-bottom: 1px solid #eee;
 }
-h4 {
-  /* margin-bottom: ; */
-  opacity: 0;
-  /* transform: translateY(-100px); */
-}
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
