@@ -5,23 +5,10 @@ import "./style.css";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/dist/ScrollTrigger";
 import AnimatedLoader from "../demo/AnimateLoader";
-import Lenis from "@studio-freight/lenis";
 
 const FixedSection = () => {
 	useEffect(() => {
 		gsap.registerPlugin(ScrollTrigger);
-		const lenis = new Lenis();
-
-		lenis.on("scroll", (e) => {
-			// console.log(e);
-		});
-
-		function raf(time) {
-			lenis.raf(time);
-			requestAnimationFrame(raf);
-		}
-
-		requestAnimationFrame(raf);
 
 		const contentSelectors = [
 			".content1 .text_wrapper",

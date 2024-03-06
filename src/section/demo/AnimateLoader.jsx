@@ -4,24 +4,12 @@ import React, { useState, useRef, useEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import animation from "@/assets/animation.json";
-import Lenis from "@studio-freight/lenis";
 export default function AnimatedLoader() {
 	const [instance, setInstance] = useState();
 	const playerRef = useRef();
 	const animationRef = useRef();
 	gsap.registerPlugin(ScrollTrigger);
-	const lenis = new Lenis();
 
-	lenis.on("scroll", (e) => {
-		// console.log(e);
-	});
-
-	function raf(time) {
-		lenis.raf(time);
-		requestAnimationFrame(raf);
-	}
-
-	requestAnimationFrame(raf);
 	useEffect(() => {
 		ScrollTrigger.defaults({
 			// markers: true,
