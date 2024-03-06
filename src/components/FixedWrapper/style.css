@@ -17,8 +17,8 @@
 	background-image: url("../../assets/images/start-bg.svg");
 	background-position: top center;
 	background-size: contain;
-	margin-top: 3rem;
-	gap: 3.5rem;
+	margin-top: 4rem;
+	gap: 1rem;
 }
 
 .section_bg_wrapper .section1 .lottie_fixed {
@@ -39,7 +39,7 @@
 	display: flex;
 	flex-direction: column;
 	gap: 1.2rem;
-	transform: translateY(30px);
+	/* transform: translateY(10px); */
 }
 
 .section_bg_wrapper .content_wrapper .content1,

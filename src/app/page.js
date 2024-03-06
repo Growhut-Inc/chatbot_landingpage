@@ -7,7 +7,7 @@ export default function Home() {
 	return (
 		<main className={styles.main}>
 			<ScrollWrapper>
-				{/* <Navbar /> */}
+				<Navbar />
 				<FixedSection />
 			</ScrollWrapper>
 		</main>

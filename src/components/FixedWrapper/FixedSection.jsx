@@ -1,13 +1,13 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/dist/ScrollTrigger";
 import AnimatedLoader from "../LottieAnimation/AnimateLoader";
 import "./style.css";
 import SlideCounter from "../SlideCounter/SlideCounter";
-import Navbar from "../Navbar/Navbar";
 
 const FixedSection = () => {
+	const [currentSlide, setCurrentSlide] = useState(0);
 	useEffect(() => {
 		gsap.registerPlugin(ScrollTrigger);
 
@@ -33,6 +33,12 @@ const FixedSection = () => {
 				start: "top center",
 				end: () => `+=${animationDuration}`,
 				scrub: true,
+				onUpdate: (self) => {
+					const progress = Math.ceil(
+						self.progress * contentSelectors.length
+					);
+					setCurrentSlide(progress);
+				},
 				// markers: true,
 			},
 		});
@@ -42,7 +48,7 @@ const FixedSection = () => {
 				opacity: 1,
 				scale: 1.1,
 				delay: 0.2,
-				y: -30,
+				y: -20,
 				duration: contentAnimationDuration,
 			})
 			.from(contentSelectors[0], {
@@ -111,6 +117,7 @@ const FixedSection = () => {
 		<div className="section_bg_wrapper">
 			<div className="section1">
 				<AnimatedLoader />
+				<SlideCounter count={`${currentSlide}/8`} />
 				<div className="content_wrapper">
 					<div className="content1">
 						<div className="text_wrapper">
@@ -121,7 +128,7 @@ const FixedSection = () => {
 								themselves."
 							</h6>
 							<p>- Steve Jobs</p>
-							<SlideCounter count={"1/8"} />
+							{/* <SlideCounter count={"1/8"} /> */}
 						</div>
 					</div>
 					<div className="content2">
@@ -134,7 +141,7 @@ const FixedSection = () => {
 								growth and thriving in today's market.
 							</p>
 
-							<SlideCounter count={"2/8"} />
+							{/* <SlideCounter count={"2/8"} /> */}
 						</div>
 					</div>
 					<div className="content3">
@@ -147,7 +154,7 @@ const FixedSection = () => {
 								Let's dive into how it transforms your business.
 							</p>
 
-							<SlideCounter count={"3/8"} />
+							{/* <SlideCounter count={"3/8"} /> */}
 						</div>
 					</div>
 					<div className="content4">
@@ -161,7 +168,7 @@ const FixedSection = () => {
 								keep coming back.
 							</p>
 
-							<SlideCounter count={"4/8"} />
+							{/* <SlideCounter count={"4/8"} /> */}
 						</div>
 					</div>
 					<div className="content5">
@@ -178,7 +185,7 @@ const FixedSection = () => {
 								connection.
 							</p>
 
-							<SlideCounter count={"5/8"} />
+							{/* <SlideCounter count={"5/8"} /> */}
 						</div>
 					</div>
 					<div className="content6">
@@ -192,7 +199,7 @@ const FixedSection = () => {
 								through your sales funnel.
 							</p>
 
-							<SlideCounter count={"6/8"} />
+							{/* <SlideCounter count={"6/8"} /> */}
 						</div>
 					</div>
 					<div className="content7">
@@ -208,7 +215,7 @@ const FixedSection = () => {
 								one step ahead in your market.
 							</p>
 
-							<SlideCounter count={"7/8"} />
+							{/* <SlideCounter count={"7/8"} /> */}
 						</div>
 					</div>
 				</div>
