@@ -94,7 +94,7 @@ body {
     )
     rgb(var(--background-start-rgb));
   padding-bottom: 15rem;
-  height: 1100vh;
+  height: 1300vh;
 }
 /* ::-webkit-scrollbar {
   display: none;

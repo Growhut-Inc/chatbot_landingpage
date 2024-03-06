@@ -6,7 +6,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  height: 100vh;
+  height: 100%;
   width: 100%;
   /* border: 1px solid green; */
   display: flex;
@@ -17,13 +17,7 @@
 .section_bg_wrapper .section1 .lottie_fixed {
   width: 50%;
 }
-.section_bg_wrapper .section1 .content1,
-.content2,
-.content3,
-.content4,
-.content5 {
-  /* border: 1px solid red; */
-}
+
 .section_bg_wrapper .section1 h4 {
   opacity: 0;
   max-width: 600px;
