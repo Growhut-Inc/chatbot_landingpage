@@ -52,11 +52,13 @@ const ChatBot = () => {
 			myDivRef.current.scrollTop = myDivRef.current.scrollHeight;
 		}
 	};
+
 	useEffect(() => {
 		scrollToBottom();
 	}, [chatData]);
 	return (
 		<div className="chatbot_wrapper">
+			<div className="bg_star"></div>
 			<h2>Experience it for yourself!</h2>
 			<div className="chatbot_container">
 				<div className="icon_left">
@@ -91,6 +93,7 @@ const ChatBot = () => {
 						<input
 							type="text"
 							name="message"
+							autoComplete="off"
 							placeholder="Write your prompt here..."
 							value={userInput}
 							onChange={handleInputChange}

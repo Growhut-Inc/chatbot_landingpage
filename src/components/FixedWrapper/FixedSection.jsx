@@ -25,8 +25,6 @@ const FixedSection = () => {
 		const contentAnimationDuration =
 			animationDuration / contentSelectors.length;
 
-		// console.log(contentAnimationDuration, "contentAnimationDuration");
-
 		const timeline = gsap.timeline({
 			scrollTrigger: {
 				trigger: "#animation",
@@ -110,12 +108,42 @@ const FixedSection = () => {
 				y: -30,
 				scale: 1.1,
 				duration: contentAnimationDuration,
+			})
+			.from(contentSelectors[6], {
+				opacity: 0,
+				duration: 1,
 			});
+	}, []);
+
+	useEffect(() => {
+		gsap.registerPlugin(ScrollTrigger);
+
+		const animationDuration = 17100;
+
+		ScrollTrigger.create({
+			trigger: ".section_bg_wrapper",
+			start: "top top",
+			end: `+=${animationDuration}`,
+			pin: ".section1",
+			pinSpacing: false,
+			onToggle: (self) => {
+				if (!self.isActive) {
+					gsap.to(".navbar", { opacity: 0, y: -50 });
+				} else {
+					gsap.to(".navbar", { opacity: 1, y: 0 });
+				}
+			},
+			// markers: true,
+		});
+		return () => {
+			ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+		};
 	}, []);
 
 	return (
 		<div className="section_bg_wrapper">
 			<div className="section1">
+				<div className="bg_star"></div>
 				<AnimatedLoader />
 				<SlideCounter count={`${currentSlide}/8`} />
 				<div className="content_wrapper">
@@ -128,7 +156,6 @@ const FixedSection = () => {
 								themselves."
 							</h6>
 							<p>- Steve Jobs</p>
-							{/* <SlideCounter count={"1/8"} /> */}
 						</div>
 					</div>
 					<div className="content2">
@@ -140,8 +167,6 @@ const FixedSection = () => {
 								more than a balance; it's an art, crucial for
 								growth and thriving in today's market.
 							</p>
-
-							{/* <SlideCounter count={"2/8"} /> */}
 						</div>
 					</div>
 					<div className="content3">
@@ -153,8 +178,6 @@ const FixedSection = () => {
 								it's a revolution in customer relationships.
 								Let's dive into how it transforms your business.
 							</p>
-
-							{/* <SlideCounter count={"3/8"} /> */}
 						</div>
 					</div>
 					<div className="content4">
@@ -167,8 +190,6 @@ const FixedSection = () => {
 								them, every client has a compelling reason to
 								keep coming back.
 							</p>
-
-							{/* <SlideCounter count={"4/8"} /> */}
 						</div>
 					</div>
 					<div className="content5">
@@ -184,8 +205,6 @@ const FixedSection = () => {
 								touchpoint into an opportunity for growth and
 								connection.
 							</p>
-
-							{/* <SlideCounter count={"5/8"} /> */}
 						</div>
 					</div>
 					<div className="content6">
@@ -198,8 +217,6 @@ const FixedSection = () => {
 								satisfied, loyal customers, smoothly navigating
 								through your sales funnel.
 							</p>
-
-							{/* <SlideCounter count={"6/8"} /> */}
 						</div>
 					</div>
 					<div className="content7">
@@ -214,8 +231,6 @@ const FixedSection = () => {
 								This intelligence is what puts you ahead, always
 								one step ahead in your market.
 							</p>
-
-							{/* <SlideCounter count={"7/8"} /> */}
 						</div>
 					</div>
 				</div>

@@ -35,7 +35,10 @@ export default function AnimatedLoader() {
 			// }
 			const animationHeight = instance.totalFrames * 5;
 			// console.log(animationHeight, "animationHeight");
-			document.body.style.height = `${animationHeight - 2200}px`;
+			// document.body.style.height = `${animationHeight - 2200}px`;
+			document.querySelector(".section_bg_wrapper").style.height = `${
+				animationHeight - 2200
+			}px`;
 		};
 
 		ScrollTrigger.create({

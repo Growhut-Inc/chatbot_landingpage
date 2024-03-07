@@ -3,6 +3,7 @@ import Image from "next/image";
 import "./style.css";
 import logo from "@/assets/images/logo.svg";
 import { useEffect, useState } from "react";
+import arrowUp from "@/assets/images/arrow-up.svg";
 const Footer = () => {
 	const [email, setEmail] = useState("");
 	const [error, setError] = useState("");
@@ -30,6 +31,9 @@ const Footer = () => {
 	// }, [error]);
 	return (
 		<div className="footer_section_wrapper">
+			<div className="arrow_up">
+				<Image src={arrowUp} width={45} height={0} alt="icon" />
+			</div>
 			<div className="form_wrapper">
 				<span className="sm_text">Elevate your product</span>
 				<h4 className="heading">Lets collaborate!</h4>

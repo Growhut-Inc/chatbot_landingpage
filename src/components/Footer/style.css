@@ -7,6 +7,11 @@
 	padding: 3rem;
 	color: #fff;
 	text-align: center;
+	background: radial-gradient(50% 50% at 50% 50%, #1a0733 0%, #080011 100%);
+}
+.footer_section_wrapper .arrow_up {
+	margin: 3rem 0;
+	animation: arrow 2s ease-in-out infinite;
 }
 .footer_section_wrapper .form_wrapper {
 	display: flex;
