@@ -1,14 +1,19 @@
 .section_bg_wrapper {
 	height: 100vh;
+	width: 100%;
 	background: radial-gradient(50% 50% at 50% 50%, #1a0733 0%, #080011 100%);
 	position: fixed;
 	top: 0;
 	left: 0;
+	/* will remove */
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .section_bg_wrapper .section1 {
 	color: #fff;
-	height: 100%;
+	height: 100vh;
 	width: 100%;
 	display: flex;
 	justify-content: flex-start;
