@@ -62,6 +62,7 @@ export default function AnimatedLoader() {
 			style={{
 				width: "46%",
 				height: "max-content",
+				marginTop: "2.2rem",
 			}}
 		>
 			<Player
