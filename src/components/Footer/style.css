@@ -92,7 +92,7 @@
 	filter: drop-shadow(0px 0px 5px #9746ff);
 }
 .footer_section_wrapper .footer {
-	margin-top: 5rem;
+	margin-top: 3rem;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -131,6 +131,7 @@
 
 	.footer_section_wrapper .footer {
 		gap: 0.5rem;
+		margin-top: 2rem;
 	}
 	.footer_section_wrapper .footer img {
 		width: 60px;

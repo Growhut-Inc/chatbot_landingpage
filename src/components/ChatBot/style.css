@@ -9,6 +9,7 @@
 	margin: 8rem 0 4rem 0;
 	position: relative;
 	z-index: 10;
+	padding: 0 1rem;
 }
 
 .chatbot_wrapper h2 {
@@ -193,7 +194,12 @@
 		right: 8.5vw;
 		z-index: 12;
 	}
-
+	.chatbot_wrapper .chatbot_container .icon_left img {
+		width: 40px;
+	}
+	.chatbot_wrapper .chatbot_container .icon_right img {
+		width: 32px;
+	}
 	.chatbot .messages .chat_bubble p,
 	.chatbot .input_wrapper input {
 		font-size: 13px;
