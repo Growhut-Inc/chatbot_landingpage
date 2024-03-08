@@ -65,6 +65,20 @@ const ChatBot = () => {
 					<Image src={leftIcon} width={50} height={0} alt="icon" />
 				</div>
 				<div className="chatbot">
+					<div className="icon_container_ss">
+						<Image
+							src={leftIcon}
+							width={50}
+							height={0}
+							alt="icon"
+						/>
+						<Image
+							src={rightIcon}
+							width={50}
+							height={0}
+							alt="icon"
+						/>
+					</div>
 					<div className="messages" ref={myDivRef}>
 						{chatData.map((chat, index) => {
 							return (

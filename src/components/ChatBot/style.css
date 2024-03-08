@@ -39,7 +39,6 @@
 	align-items: center;
 	gap: 2rem;
 	width: 100%;
-	position: relative;
 }
 
 .chatbot_wrapper .chatbot_container .chatbot {
@@ -151,24 +150,40 @@
 .chatbot_wrapper .chatbot_container .icon_left {
 	filter: drop-shadow(0px 0px 10px #ffffffae);
 }
+.chatbot_wrapper .chatbot_container .chatbot .icon_container_ss {
+	display: none;
+}
 
 @media only screen and (max-width: 800px) {
 	.chatbot_wrapper .chatbot_container .chatbot {
 		width: 80%;
 		height: 500px;
 	}
-	.chatbot_wrapper .chatbot_container .icon_left {
-		position: absolute;
-		top: -5px;
-		left: 13.5vw;
-		z-index: 12;
-	}
-
+	.chatbot_wrapper .chatbot_container .icon_left,
 	.chatbot_wrapper .chatbot_container .icon_right {
-		position: absolute;
-		top: -5px;
-		right: 13.5vw;
-		z-index: 12;
+		display: none;
+	}
+	.chatbot_wrapper .chatbot_container .chatbot .icon_container_ss {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 0 1rem 0.5rem 1rem;
+		margin-top: -0.5rem;
+		border-radius: 30px 30px 0 0;
+	}
+	.chatbot_wrapper
+		.chatbot_container
+		.chatbot
+		.icon_container_ss
+		img:nth-child(1) {
+		width: 40px;
+	}
+	.chatbot_wrapper
+		.chatbot_container
+		.chatbot
+		.icon_container_ss
+		img:nth-child(2) {
+		width: 32px;
 	}
 }
 @media only screen and (max-width: 739px) {
