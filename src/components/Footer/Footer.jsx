@@ -36,7 +36,7 @@ const Footer = () => {
 			</div>
 			<div className="form_wrapper">
 				<span className="sm_text">Elevate your product</span>
-				<h4 className="heading">Lets collaborate!</h4>
+				<p className="heading">Lets collaborate!</p>
 				<div className="input_feild">
 					<span className="input_text">Work Email</span>
 					<input

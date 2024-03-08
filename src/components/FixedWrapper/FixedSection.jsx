@@ -20,7 +20,7 @@ const FixedSection = () => {
 			".content6 .text_wrapper",
 			".content7 .text_wrapper",
 		];
-		const animationDuration = 17800;
+		const animationDuration = 16960; //height of section_bg_wrapper
 
 		const contentAnimationDuration =
 			animationDuration / contentSelectors.length;
@@ -118,7 +118,7 @@ const FixedSection = () => {
 	useEffect(() => {
 		gsap.registerPlugin(ScrollTrigger);
 
-		const animationDuration = 17100;
+		const animationDuration = 16260; //-700
 
 		ScrollTrigger.create({
 			trigger: ".section_bg_wrapper",
@@ -149,18 +149,18 @@ const FixedSection = () => {
 				<div className="content_wrapper">
 					<div className="content1">
 						<div className="text_wrapper">
-							<h6>
+							<span className="italic_text">
 								"Get closer than ever to your customers.
 								<br /> So close, in fact, that you tell them
 								what they need well before they realize it
 								themselves."
-							</h6>
+							</span>
 							<p>- Steve Jobs</p>
 						</div>
 					</div>
 					<div className="content2">
 						<div className="text_wrapper">
-							<h4>Every business owner knows the dance</h4>
+							<h4>Every business owner knows the dance.</h4>
 							<p>
 								Attracting new customers while keeping the loyal
 								ones not just satisfied, but delighted. It's
@@ -182,7 +182,7 @@ const FixedSection = () => {
 					</div>
 					<div className="content4">
 						<div className="text_wrapper">
-							<h4>Here's where our journey takes a turn</h4>
+							<h4>Here's where our journey takes a turn.</h4>
 							<p>
 								We unveil the power of tailor-made AI Chatbots
 								by Growhut. These aren't just chatbots; they're
@@ -196,7 +196,7 @@ const FixedSection = () => {
 						<div className="text_wrapper">
 							<h4>
 								Step with us into the future of customer
-								engagement
+								engagement.
 							</h4>
 							<p>
 								The Growhut AI Chatbots offer more than just
@@ -209,7 +209,7 @@ const FixedSection = () => {
 					</div>
 					<div className="content6">
 						<div className="text_wrapper">
-							<h4>This is where the magic happend.</h4>
+							<h4>This is where the magic happens.</h4>
 							<p>
 								Transform your sales process with the Growhut AI
 								Chatbots. Watch the seamless transition as

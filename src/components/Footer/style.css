@@ -23,8 +23,9 @@
 .footer_section_wrapper .form_wrapper .sm_text {
 	color: #848484;
 	font-size: 15px;
-	font-weight: 400;
 	line-height: normal;
+	font-family: "Noto Sans";
+	font-weight: 500;
 }
 .footer_section_wrapper .form_wrapper .heading {
 	color: #fff;
@@ -43,6 +44,8 @@
 .footer_section_wrapper .form_wrapper .input_feild .input_text {
 	font-size: 12px;
 	padding: 0.2rem 0.4rem;
+	font-family: "Noto Sans";
+	letter-spacing: 0.8px;
 	position: absolute;
 	top: -10px;
 	left: 10px;
@@ -55,6 +58,8 @@
 	background: none;
 	color: #fff;
 	font-size: 16px;
+	font-family: "Noto Sans";
+	font-weight: normal;
 }
 .footer_section_wrapper .form_wrapper .action_wrapper {
 	display: flex;
@@ -62,6 +67,8 @@
 	justify-content: center;
 	align-items: center;
 	gap: 1.8rem;
+	font-family: "Noto Sans";
+	font-weight: normal;
 }
 .footer_section_wrapper .form_wrapper .action_wrapper .submit {
 	border-radius: 200px;
@@ -113,4 +120,34 @@
 	margin-bottom: 1rem;
 	color: #848484;
 	font-size: 13px;
+}
+@media only screen and (max-width: 769px) {
+	.footer_section_wrapper {
+		padding: 0 1rem 2rem 1rem;
+	}
+	.footer_section_wrapper .form_wrapper .heading {
+		font-size: 18px;
+	}
+
+	.footer_section_wrapper .footer {
+		gap: 0.5rem;
+	}
+	.footer_section_wrapper .footer img {
+		width: 60px;
+	}
+	.footer_section_wrapper .footer .link {
+		font-size: 15px;
+	}
+}
+@media only screen and (max-width: 426px) {
+	.footer_section_wrapper .form_wrapper {
+		width: 100%;
+	}
+	.footer_section_wrapper .form_wrapper .input_feild {
+		margin: 3rem 0 2rem 0;
+		border-radius: 15px;
+		border: 1px solid #fff;
+		padding: 1rem;
+		min-width: 100%;
+	}
 }

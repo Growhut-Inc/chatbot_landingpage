@@ -4,6 +4,7 @@
 	position: relative;
 	top: 0;
 	left: 0;
+	z-index: 15;
 }
 
 .section_bg_wrapper .section1 {
@@ -20,7 +21,7 @@
 	z-index: 99;
 	overflow: hidden;
 	position: relative;
-	z-index: 5;
+	z-index: 20;
 }
 .section_bg_wrapper .section1 .bg_star {
 	width: 100%;
@@ -31,7 +32,7 @@
 	position: absolute;
 	top: 0;
 	left: 0;
-	z-index: 2;
+	z-index: -1;
 }
 .section_bg_wrapper .content_wrapper {
 	position: relative;
@@ -66,17 +67,69 @@
 	align-items: center;
 }
 
-.section_bg_wrapper .section1 .text_wrapper h6 {
+.section_bg_wrapper .section1 .content1 .text_wrapper .italic_text {
 	font-size: 22px;
 	font-style: italic;
-	font-weight: 200;
+	font-weight: 400;
+	font-family: "Noto Sans";
+}
+.section_bg_wrapper .section1 .content1 .text_wrapper p {
+	font-size: 17px;
+	font-family: "Noto Sans";
+	font-style: normal;
 }
 .section_bg_wrapper .section1 .text_wrapper h4 {
 	font-size: 22px;
-	font-weight: 800;
+	font-weight: 400;
+	font-family: "Monument Extended";
+	font-style: normal;
 }
 .section_bg_wrapper .section1 .text_wrapper p {
 	font-size: 17px;
-	font-weight: 300;
+	font-family: "Noto Sans";
+	font-style: normal;
+	font-weight: 400;
 	line-height: 160%; /* 38.4px */
+}
+@media only screen and (max-width: 950px) {
+	.section_bg_wrapper .section1 {
+		gap: 4rem;
+	}
+	.section_bg_wrapper .section1 .content1 .text_wrapper .italic_text {
+		font-size: 18px;
+	}
+	.section_bg_wrapper .section1 .content1 .text_wrapper p {
+		font-size: 17px;
+	}
+	.section_bg_wrapper .section1 .text_wrapper h4 {
+		font-size: 18px;
+	}
+	.section_bg_wrapper .section1 .text_wrapper p {
+		font-size: 14px;
+	}
+	.section_bg_wrapper .section1 .text_wrapper {
+		opacity: 0;
+		max-width: calc(100% - 20%);
+	}
+}
+@media only screen and (max-width: 500px) {
+	.section_bg_wrapper .section1 {
+		gap: 4rem;
+	}
+	.section_bg_wrapper .section1 .content1 .text_wrapper .italic_text {
+		font-size: 15px;
+	}
+	.section_bg_wrapper .section1 .content1 .text_wrapper p {
+		font-size: 14px;
+	}
+	.section_bg_wrapper .section1 .text_wrapper h4 {
+		font-size: 14px;
+	}
+	.section_bg_wrapper .section1 .text_wrapper p {
+		font-size: 14px;
+	}
+	.section_bg_wrapper .section1 .text_wrapper {
+		opacity: 0;
+		max-width: calc(100% - 20%);
+	}
 }

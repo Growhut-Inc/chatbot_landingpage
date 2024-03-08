@@ -15,3 +15,11 @@
 .slide_count .img_wrapper {
 	filter: drop-shadow(0px 0px 6px #fff);
 }
+.slide_count span {
+	text-align: center;
+	font-family: "Noto Sans";
+	font-size: 15px;
+	font-style: normal;
+	font-weight: 100;
+	letter-spacing: 2px;
+}

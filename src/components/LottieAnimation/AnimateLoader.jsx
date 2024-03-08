@@ -3,7 +3,9 @@ import { Player } from "@lottiefiles/react-lottie-player";
 import React, { useState, useRef, useEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import animation from "@/assets/animation.json";
+import animation from "@/assets/animation1.json";
+import "./style.css";
+
 export default function AnimatedLoader() {
 	const [instance, setInstance] = useState();
 	const playerRef = useRef();
@@ -12,7 +14,7 @@ export default function AnimatedLoader() {
 
 	useEffect(() => {
 		ScrollTrigger.defaults({
-			// markers: true,
+			// markers: true
 		});
 		gsap.registerPlugin(ScrollTrigger);
 	}, []);
@@ -26,7 +28,7 @@ export default function AnimatedLoader() {
 
 		const onUpdate = (self) => {
 			const progress = self.progress;
-			// console.log(progress, "progress");
+
 			const currentFrame = Math.round(instance.totalFrames * progress);
 			instance.goToAndStop(currentFrame, true);
 
@@ -34,8 +36,6 @@ export default function AnimatedLoader() {
 			// 	playerRef.current.setSeeker("100%");
 			// }
 			const animationHeight = instance.totalFrames * 5;
-			// console.log(animationHeight, "animationHeight");
-			// document.body.style.height = `${animationHeight - 2200}px`;
 			document.querySelector(".section_bg_wrapper").style.height = `${
 				animationHeight - 2200
 			}px`;
@@ -56,15 +56,7 @@ export default function AnimatedLoader() {
 	}, [instance]);
 
 	return (
-		<div
-			id="animation"
-			ref={animationRef}
-			style={{
-				width: "46%",
-				height: "max-content",
-				marginTop: "2.2rem",
-			}}
-		>
+		<div id="animation" ref={animationRef}>
 			<Player
 				lottieRef={(ins) => {
 					setInstance(ins);
