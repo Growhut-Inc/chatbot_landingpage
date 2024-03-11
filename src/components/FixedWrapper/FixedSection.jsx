@@ -8,8 +8,25 @@ import SlideCounter from "../SlideCounter/SlideCounter";
 
 const FixedSection = () => {
 	const [currentSlide, setCurrentSlide] = useState(0);
+	const [isSmallScreen, setIsSmallScreen] = useState(false);
+
+	const checkScreenSize = () => {
+		// Check if the screen width is below 768 pixels
+		if (typeof window !== "undefined") {
+			if (window.innerWidth < 768) {
+				setIsSmallScreen(true);
+			} else {
+				setIsSmallScreen(false);
+			}
+		}
+	};
+
 	useEffect(() => {
 		gsap.registerPlugin(ScrollTrigger);
+		if (typeof window !== "undefined") {
+			window.addEventListener("resize", checkScreenSize);
+			checkScreenSize();
+		}
 
 		const contentSelectors = [
 			".content1 .text_wrapper",
@@ -20,7 +37,7 @@ const FixedSection = () => {
 			".content6 .text_wrapper",
 			".content7 .text_wrapper",
 		];
-		const animationDuration = 16960; //height of section_bg_wrapper
+		const animationDuration = isSmallScreen ? 3548 : 11212; //height of section_bg_wrapper
 
 		const contentAnimationDuration =
 			animationDuration / contentSelectors.length;
@@ -113,13 +130,16 @@ const FixedSection = () => {
 				opacity: 0,
 				duration: 1,
 			});
-	}, []);
+		return () => {
+			window.removeEventListener("resize", checkScreenSize);
+		};
+	}, [isSmallScreen]);
 
 	useEffect(() => {
 		gsap.registerPlugin(ScrollTrigger);
 
-		const animationDuration = 16260; //-700
-
+		const animationDuration = isSmallScreen ? 2848 : 10512; //-700
+		console.log(animationDuration, "sm");
 		ScrollTrigger.create({
 			trigger: ".section_bg_wrapper",
 			start: "top top",
@@ -138,7 +158,7 @@ const FixedSection = () => {
 		return () => {
 			ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
 		};
-	}, []);
+	}, [isSmallScreen]);
 
 	return (
 		<div className="section_bg_wrapper">

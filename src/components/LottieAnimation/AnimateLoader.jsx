@@ -8,11 +8,27 @@ import "./style.css";
 
 export default function AnimatedLoader() {
 	const [instance, setInstance] = useState();
+	const [isSmallScreen, setIsSmallScreen] = useState(false);
+
 	const playerRef = useRef();
 	const animationRef = useRef();
 	gsap.registerPlugin(ScrollTrigger);
 
+	const checkScreenSize = () => {
+		if (typeof window !== "undefined") {
+			if (window.innerWidth < 768) {
+				setIsSmallScreen(true);
+			} else {
+				setIsSmallScreen(false);
+			}
+		}
+	};
+
 	useEffect(() => {
+		if (typeof window !== "undefined") {
+			window.addEventListener("resize", checkScreenSize);
+			checkScreenSize();
+		}
 		ScrollTrigger.defaults({
 			// markers: true
 		});
@@ -32,20 +48,18 @@ export default function AnimatedLoader() {
 			const currentFrame = Math.round(instance.totalFrames * progress);
 			instance.goToAndStop(currentFrame, true);
 
-			// if (progress === 1) {
-			// 	playerRef.current.setSeeker("100%");
-			// }
-			const animationHeight = instance.totalFrames * 5;
+			const animationHeight =
+				instance.totalFrames * (isSmallScreen ? 1.5 : 3.5);
 			document.querySelector(".section_bg_wrapper").style.height = `${
 				animationHeight - 2200
 			}px`;
 		};
+		console.log(instance.totalFrames * (isSmallScreen ? 1 : 3.2), "lottie");
 
 		ScrollTrigger.create({
 			trigger: animationRef.current,
-			// pin: true,
 			start: "-50% 50%",
-			end: () => `+=${instance.totalFrames * 5}`,
+			end: () => `+=${instance.totalFrames * (isSmallScreen ? 1 : 3.2)}`,
 			scrub: true,
 			onUpdate: onUpdate,
 		});
@@ -53,7 +67,7 @@ export default function AnimatedLoader() {
 		return () => {
 			ScrollTrigger.getAll().forEach((trigger) => trigger.revert());
 		};
-	}, [instance]);
+	}, [instance, isSmallScreen]);
 
 	return (
 		<div id="animation" ref={animationRef}>
