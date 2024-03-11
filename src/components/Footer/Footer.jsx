@@ -2,7 +2,7 @@
 import Image from "next/image";
 import "./style.css";
 import logo from "@/assets/images/logo.svg";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import arrowUp from "@/assets/images/arrow-up.svg";
 const Footer = () => {
 	const [email, setEmail] = useState("");
@@ -24,13 +24,8 @@ const Footer = () => {
 			setError("Email invalid, retry !");
 		}
 	};
-	// useEffect(() => {
-	// 	setTimeout(() => {
-	// 		setError("");
-	// 	}, 3000);
-	// }, [error]);
 	return (
-		<div className="footer_section_wrapper">
+		<section className="footer_section_wrapper">
 			<div className="arrow_up">
 				<Image src={arrowUp} width={45} height={0} alt="icon" />
 			</div>
@@ -62,7 +57,7 @@ const Footer = () => {
 					https://growhut.in/
 				</a>
 			</div>
-		</div>
+		</section>
 	);
 };
 

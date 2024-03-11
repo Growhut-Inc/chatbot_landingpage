@@ -54,7 +54,6 @@ export default function AnimatedLoader() {
 				animationHeight - 2200
 			}px`;
 		};
-		console.log(instance.totalFrames * (isSmallScreen ? 1 : 3.2), "lottie");
 
 		ScrollTrigger.create({
 			trigger: animationRef.current,

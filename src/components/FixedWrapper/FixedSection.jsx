@@ -139,7 +139,7 @@ const FixedSection = () => {
 		gsap.registerPlugin(ScrollTrigger);
 
 		const animationDuration = isSmallScreen ? 2848 : 10512; //-700
-		console.log(animationDuration, "sm");
+
 		ScrollTrigger.create({
 			trigger: ".section_bg_wrapper",
 			start: "top top",

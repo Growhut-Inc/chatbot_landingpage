@@ -57,7 +57,7 @@ const ChatBot = () => {
 		scrollToBottom();
 	}, [chatData]);
 	return (
-		<div className="chatbot_wrapper">
+		<section className="panel chatbot_wrapper">
 			<div className="bg_star"></div>
 			<h2>Experience it for yourself!</h2>
 			<div className="chatbot_container">
@@ -131,7 +131,7 @@ const ChatBot = () => {
 					<Image src={rightIcon} width={40} height={0} alt="icon" />
 				</div>
 			</div>
-		</div>
+		</section>
 	);
 };
 
