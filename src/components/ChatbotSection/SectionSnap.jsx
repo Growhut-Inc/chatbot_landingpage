@@ -9,25 +9,35 @@ gsap.registerPlugin(ScrollTrigger);
 const SectionSnap = () => {
 	const containerRef = useRef(null);
 
-	useEffect(() => {
-		gsap.to(".panel", {
-			scrollTrigger: {
-				trigger: ".panel",
-				start: "5% top",
-				end: "50% 15%",
-				scrub: true,
-				pin: true,
-				// pinSpacing: false,
-				// markers: true,
-			},
-		});
-		return () => {
-			ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-		};
-	}, []);
+	// useEffect(() => {
+	// 	gsap.to(".panel", {
+	// 		scrollTrigger: {
+	// 			trigger: ".panel",
+	// 			start: "top top",
+	// 			end: "50% 15%",
+	// 			scrub: true,
+	// 			pin: true,
+	// 			pinSpacing: false,
+	// 			markers: true,
+	// 		},
+	// 	});
+	// 	return () => {
+	// 		ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+	// 	};
+	// }, []);
 
 	return (
-		<div className="snap_container" ref={containerRef}>
+		<div
+			className="snap_container"
+			ref={containerRef}
+			style={{
+				height: "100vh",
+				// border: "1px solid red",
+				// display: "flex",
+				// justifyContent: "center",
+				// alignItems: "center",
+			}}
+		>
 			<ChatBot />
 		</div>
 	);

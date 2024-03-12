@@ -2,7 +2,7 @@
 import Image from "next/image";
 import "./style.css";
 import logo from "@/assets/images/logo.svg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import arrowUp from "@/assets/images/arrow-up.svg";
 const Footer = () => {
 	const [email, setEmail] = useState("");
@@ -24,6 +24,13 @@ const Footer = () => {
 			setError("Email invalid, retry !");
 		}
 	};
+	useEffect(() => {
+		if (typeof window !== "undefined") {
+			window.scrollTo({
+				top: 0,
+			});
+		}
+	}, []);
 	return (
 		<section className="footer_section_wrapper">
 			<div className="arrow_up">

@@ -7,7 +7,7 @@ import "./style.css";
 import SlideCounter from "../SlideCounter/SlideCounter";
 
 const FixedSection = () => {
-	const [currentSlide, setCurrentSlide] = useState(0);
+	const [currentSlide, setCurrentSlide] = useState(1);
 	const [isSmallScreen, setIsSmallScreen] = useState(false);
 
 	const checkScreenSize = () => {
@@ -37,7 +37,7 @@ const FixedSection = () => {
 			".content6 .text_wrapper",
 			".content7 .text_wrapper",
 		];
-		const animationDuration = isSmallScreen ? 3548 : 11212; //height of section_bg_wrapper
+		const animationDuration = isSmallScreen ? 3667 : 8068; //height of animation
 
 		const contentAnimationDuration =
 			animationDuration / contentSelectors.length;
@@ -138,7 +138,7 @@ const FixedSection = () => {
 	useEffect(() => {
 		gsap.registerPlugin(ScrollTrigger);
 
-		const animationDuration = isSmallScreen ? 2848 : 10512; //-700
+		const animationDuration = isSmallScreen ? 2967 : 7368; //-700
 
 		ScrollTrigger.create({
 			trigger: ".section_bg_wrapper",

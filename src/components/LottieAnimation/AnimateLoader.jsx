@@ -3,7 +3,7 @@ import { Player } from "@lottiefiles/react-lottie-player";
 import React, { useState, useRef, useEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import animation from "@/assets/animation1.json";
+import animation from "@/assets/animation2.json";
 import "./style.css";
 
 export default function AnimatedLoader() {
@@ -30,13 +30,13 @@ export default function AnimatedLoader() {
 			checkScreenSize();
 		}
 		ScrollTrigger.defaults({
-			// markers: true
+			// markers: true,
 		});
 		gsap.registerPlugin(ScrollTrigger);
 	}, []);
 
 	useEffect(() => {
-		playerRef.current.setSeeker("20%");
+		playerRef.current.setSeeker("0%");
 	}, []);
 
 	useEffect(() => {
@@ -49,16 +49,21 @@ export default function AnimatedLoader() {
 			instance.goToAndStop(currentFrame, true);
 
 			const animationHeight =
-				instance.totalFrames * (isSmallScreen ? 1.5 : 3.5);
-			document.querySelector(".section_bg_wrapper").style.height = `${
-				animationHeight - 2200
-			}px`;
+				instance.totalFrames * (isSmallScreen ? 2.5 : 5.5);
+			document.querySelector(
+				".section_bg_wrapper"
+			).style.height = `${animationHeight}px`;
+			console.log(animationHeight, "animationheight");
 		};
 
 		ScrollTrigger.create({
 			trigger: animationRef.current,
-			start: "-50% 50%",
-			end: () => `+=${instance.totalFrames * (isSmallScreen ? 1 : 3.2)}`,
+			start: "-20% 50%",
+			end: () =>
+				`+=${
+					instance.totalFrames * (isSmallScreen ? 2.5 : 5.5)
+				} center`,
+			// end: "+=5901 center",
 			scrub: true,
 			onUpdate: onUpdate,
 		});
@@ -75,7 +80,7 @@ export default function AnimatedLoader() {
 					setInstance(ins);
 				}}
 				autoplay={false}
-				setSeeker={"100%"}
+				setSeeker={"0%"}
 				loop={false}
 				controls={true}
 				src={animation}
