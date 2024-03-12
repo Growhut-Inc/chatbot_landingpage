@@ -7,10 +7,10 @@ import SectionSnap from "@/components/ChatbotSection/SectionSnap";
 export default function Home() {
 	return (
 		<main>
-			<ScrollWrapper>
+			{/* <ScrollWrapper>
 				<Navbar />
 				<FixedSection />
-			</ScrollWrapper>
+			</ScrollWrapper> */}
 			<SectionSnap />
 			<Footer />
 		</main>

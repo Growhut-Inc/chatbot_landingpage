@@ -5,46 +5,63 @@ import rightIcon from "@/assets/images/chatbot/rightIcon.svg";
 import sendIcon from "@/assets/images/chatbot/sendIcon.svg";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 const ChatBot = () => {
+	const [id, setId] = useState("");
 	const [userInput, setUserInput] = useState("");
 	const [chatData, setChatData] = useState([
 		{
-			key: 1,
-			type: "ai_message",
+			type: "bot",
 			message: "Hello! I am your Growhut assistant.",
 		},
 		{
-			key: 2,
-			type: "ai_message",
+			type: "bot",
 			message: "Want to get to know us better?",
 		},
 		{
-			key: 3,
-			type: "ai_message",
+			type: "bot",
 			message: "Go ahead! Type a query.",
-		},
-		{
-			key: 4,
-			type: "user_message",
-			message: "How can I connect with growhut?",
 		},
 	]);
 	const myDivRef = useRef(null);
 	const handleInputChange = (e) => {
 		setUserInput(e.target.value);
 	};
-	const handleSend = () => {
-		if (userInput.trim() !== "") {
-			setChatData((prevChatData) => [
-				...prevChatData,
-				{
-					key: prevChatData.length + 1,
-					type: "user_message",
-					message: userInput,
-				},
-			]);
-			setUserInput("");
+	const handleSend = async () => {
+		if (userInput.trim()?.length) {
+			try {
+				const response = await fetch("/api/submit-prompt", {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify({
+						chat_id: id,
+						prompt: userInput.trim(),
+					}),
+				});
+
+				if (!response.ok) {
+					throw new Error(`Error: ${response.json()}`);
+				}
+
+				const result = await response.json();
+				if (result.status == "success") {
+					setChatData((prevChatData) => [
+						...prevChatData,
+						{
+							type: "user",
+							message: userInput.trim(),
+						},
+					]);
+					setUserInput("");
+				} else {
+					alert(result.error || "Error sending message");
+				}
+			} catch (error) {
+				console.error("Error:", error);
+			}
 		}
 	};
 	const scrollToBottom = () => {
@@ -53,9 +70,117 @@ const ChatBot = () => {
 		}
 	};
 
+	const checkWSMessage = (e) => {
+		try {
+			const messageObject = JSON.parse(e.data);
+
+			if (messageObject.chat_id === id) {
+				setChatData((prevChatData) => [
+					...prevChatData,
+					{
+						type: "bot",
+						message: messageObject.prompt,
+					},
+				]);
+			}
+		} catch (error) {
+			console.error("Error parsing message:", error);
+		}
+	};
+
+	useEffect(() => {
+		const dev = window.location.hostname === "localhost";
+		let ws;
+		let attempt = 1;
+
+		const connectWebSocket = () => {
+			ws = new WebSocket(
+				`${dev ? "ws" : "wss"}://${
+					dev ? "localhost:3000" : window.location.hostname
+				}/ws`
+			);
+
+			ws.onopen = () => {
+				console.clear();
+				console.log("WebSocket connection established");
+				attempt = 1;
+			};
+
+			ws.onmessage = checkWSMessage;
+
+			ws.onerror = (error) => {
+				console.error("WebSocket error:", error);
+			};
+
+			ws.onclose = (e) => {
+				console.log(
+					"WebSocket connection closed. Attempting to reconnect..."
+				);
+				let timeout = Math.min(20000, 2 ** attempt * 1000);
+				setTimeout(connectWebSocket, timeout);
+				attempt++;
+			};
+		};
+
+		connectWebSocket();
+
+		return () => {
+			if (ws) {
+				ws.close();
+			}
+		};
+	}, []);
+
 	useEffect(() => {
 		scrollToBottom();
 	}, [chatData]);
+	useEffect(() => {
+		const uuid_cookie = sessionStorage.getItem("chat_uuid");
+		if (uuid_cookie?.length) {
+			setId(uuid_cookie);
+		} else {
+			const uuid = uuidv4();
+			sessionStorage.setItem("chat_uuid", uuid);
+			setId(uuid);
+		}
+	}, []);
+	useEffect(() => {
+		const getPreviousChats = async () => {
+			try {
+				const response = await fetch("/api/get-prompts", {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify({
+						chat_id: id,
+					}),
+				});
+				if (!response.ok) {
+					throw new Error(`Error: ${response.json}`);
+				}
+				const result = await response.json();
+				if (result.status == "success") {
+					const data = result.data;
+					let count = chatData.length;
+					setChatData((prevChatData) => [
+						...prevChatData,
+						...(data?.map((a) => {
+							count += 1;
+							return {
+								type: a?.user_type?.toLowerCase(),
+								message: a?.prompt,
+							};
+						}) || []),
+					]);
+				}
+			} catch (error) {
+				console.error("Error getting chats:", error);
+			}
+		};
+		getPreviousChats();
+	}, [id]);
+
 	return (
 		<section className="panel chatbot_wrapper">
 			<div className="bg_star"></div>
@@ -82,17 +207,14 @@ const ChatBot = () => {
 					<div className="messages" ref={myDivRef}>
 						{chatData.map((chat, index) => {
 							return (
-								<div
-									className="bubble_container"
-									key={chat.key}
-								>
+								<div className="bubble_container" key={index}>
 									<div
 										className={`chat_bubble ${
-											chat.type === "ai_message"
+											chat.type === "bot"
 												? "left_message"
 												: ""
 										} ${
-											chat.type === "user_message"
+											chat.type === "user"
 												? "right_message"
 												: ""
 										}`}
