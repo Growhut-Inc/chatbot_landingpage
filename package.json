@@ -12,6 +12,7 @@
 	"dependencies": {
 		"@lottiefiles/react-lottie-player": "^3.5.3",
 		"@studio-freight/react-lenis": "^0.0.45",
+		"@wcj/markdown-to-html": "^3.0.2",
 		"dotenv": "^16.4.5",
 		"gsap": "^3.12.5",
 		"mongoose": "^8.2.1",

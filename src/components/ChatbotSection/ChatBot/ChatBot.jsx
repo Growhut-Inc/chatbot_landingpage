@@ -6,6 +6,7 @@ import sendIcon from "@/assets/images/chatbot/sendIcon.svg";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+import markdown from "@wcj/markdown-to-html";
 
 const ChatBot = () => {
 	const [id, setId] = useState("");
@@ -89,6 +90,55 @@ const ChatBot = () => {
 	};
 
 	useEffect(() => {
+		scrollToBottom();
+	}, [chatData]);
+	useEffect(() => {
+		const uuid_cookie = sessionStorage.getItem("chat_uuid");
+		if (uuid_cookie?.length) {
+			setId(uuid_cookie);
+		} else {
+			const uuid = uuidv4();
+			sessionStorage.setItem("chat_uuid", uuid);
+			setId(uuid);
+		}
+	}, []);
+	useEffect(() => {
+		if (!id?.length) return;
+		const getPreviousChats = async () => {
+			try {
+				const response = await fetch("/api/get-prompts", {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify({
+						chat_id: id,
+					}),
+				});
+				if (!response.ok) {
+					throw new Error(`Error: ${response.json}`);
+				}
+				const result = await response.json();
+				if (result.status == "success") {
+					const data = result.data;
+					let count = chatData.length;
+
+					setChatData((prevChatData) => [
+						...prevChatData,
+						...(data?.map((a) => {
+							count += 1;
+							return {
+								type: a?.user_type?.toLowerCase(),
+								message: markdown(a?.prompt),
+							};
+						}) || []),
+					]);
+				}
+			} catch (error) {
+				console.error("Error getting chats:", error);
+			}
+		};
+		getPreviousChats();
 		const dev = window.location.hostname === "localhost";
 		let ws;
 		let attempt = 1;
@@ -129,56 +179,6 @@ const ChatBot = () => {
 				ws.close();
 			}
 		};
-	}, []);
-
-	useEffect(() => {
-		scrollToBottom();
-	}, [chatData]);
-	useEffect(() => {
-		const uuid_cookie = sessionStorage.getItem("chat_uuid");
-		if (uuid_cookie?.length) {
-			setId(uuid_cookie);
-		} else {
-			const uuid = uuidv4();
-			sessionStorage.setItem("chat_uuid", uuid);
-			setId(uuid);
-		}
-	}, []);
-	useEffect(() => {
-		const getPreviousChats = async () => {
-			try {
-				const response = await fetch("/api/get-prompts", {
-					method: "POST",
-					headers: {
-						"Content-Type": "application/json",
-					},
-					body: JSON.stringify({
-						chat_id: id,
-					}),
-				});
-				if (!response.ok) {
-					throw new Error(`Error: ${response.json}`);
-				}
-				const result = await response.json();
-				if (result.status == "success") {
-					const data = result.data;
-					let count = chatData.length;
-					setChatData((prevChatData) => [
-						...prevChatData,
-						...(data?.map((a) => {
-							count += 1;
-							return {
-								type: a?.user_type?.toLowerCase(),
-								message: a?.prompt,
-							};
-						}) || []),
-					]);
-				}
-			} catch (error) {
-				console.error("Error getting chats:", error);
-			}
-		};
-		getPreviousChats();
 	}, [id]);
 
 	return (
@@ -219,7 +219,11 @@ const ChatBot = () => {
 												: ""
 										}`}
 									>
-										<p>{chat.message}</p>
+										<p
+											dangerouslySetInnerHTML={{
+												__html: chat.message,
+											}}
+										></p>
 									</div>
 								</div>
 							);
