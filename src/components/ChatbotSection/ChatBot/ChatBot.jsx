@@ -9,6 +9,7 @@ import { v4 as uuidv4 } from "uuid";
 import markdown from "@wcj/markdown-to-html";
 
 const ChatBot = () => {
+	const [isWaitForBotMessage, setWaitForBotMessage] = useState(false);
 	const [id, setId] = useState("");
 	const [userInput, setUserInput] = useState("");
 	const [chatData, setChatData] = useState([
@@ -53,10 +54,11 @@ const ChatBot = () => {
 						...prevChatData,
 						{
 							type: "user",
-							message: userInput.trim(),
+							message: markdown(userInput.trim()),
 						},
 					]);
 					setUserInput("");
+					setWaitForBotMessage(true);
 				} else {
 					alert(result.error || "Error sending message");
 				}
@@ -76,11 +78,12 @@ const ChatBot = () => {
 			const messageObject = JSON.parse(e.data);
 
 			if (messageObject.chat_id === id) {
+				setWaitForBotMessage(false);
 				setChatData((prevChatData) => [
 					...prevChatData,
 					{
 						type: "bot",
-						message: messageObject.prompt,
+						message: markdown(messageObject.prompt),
 					},
 				]);
 			}
@@ -187,7 +190,13 @@ const ChatBot = () => {
 			<h2>Experience it for yourself!</h2>
 			<div className="chatbot_container">
 				<div className="icon_left">
-					<Image src={leftIcon} width={50} height={0} alt="icon" />
+					<Image
+						src={leftIcon}
+						width={50}
+						height={0}
+						alt="icon"
+						className={isWaitForBotMessage ? "bounce_img" : ""}
+					/>
 				</div>
 				<div className="chatbot">
 					<div className="icon_container_ss">
@@ -228,6 +237,17 @@ const ChatBot = () => {
 								</div>
 							);
 						})}
+						{isWaitForBotMessage ? (
+							<div className="bubble_container">
+								<div
+									className={`chat_bubble left_message loading`}
+								>
+									<div className="loader"></div>
+								</div>
+							</div>
+						) : (
+							<></>
+						)}
 					</div>
 					<div className="input_wrapper">
 						<input
@@ -254,7 +274,13 @@ const ChatBot = () => {
 					</div>
 				</div>
 				<div className="icon_right">
-					<Image src={rightIcon} width={40} height={0} alt="icon" />
+					<Image
+						src={rightIcon}
+						width={40}
+						height={0}
+						alt="icon"
+						className={!isWaitForBotMessage ? "bounce_img" : ""}
+					/>
 				</div>
 			</div>
 		</section>
