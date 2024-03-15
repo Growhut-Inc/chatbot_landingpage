@@ -11,8 +11,8 @@ export default function Home() {
 				<Navbar />
 				<FixedSection />
 			</ScrollWrapper>
-			<SectionSnap />
-			<Footer />
+			{/* <SectionSnap />
+			<Footer /> */}
 		</main>
 	);
 }
