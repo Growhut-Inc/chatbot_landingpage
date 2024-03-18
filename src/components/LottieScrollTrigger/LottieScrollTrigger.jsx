@@ -11,7 +11,7 @@ function LottieScrollTrigger() {
 	const animationInstance = useRef(null);
 	const currentIndexRef = useRef(0);
 	const isAnimating = useRef(false);
-	const maxLength = 2;
+	const maxLength = 8;
 
 	const loadAnimation = (index, direction) => {
 		if (animationInstance.current) {
@@ -72,7 +72,7 @@ function LottieScrollTrigger() {
 	return (
 		<div
 			ref={animationContainer}
-			style={{ width: "100%", height: "100vh" }}
+			style={{ width: "100%", height: "40vh" }}
 		/>
 	);
 }
