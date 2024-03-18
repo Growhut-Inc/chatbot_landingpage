@@ -9,10 +9,14 @@
 	margin-top: 1rem;
 	position: fixed;
 	bottom: 20px;
+	width: 100%;
+	color: white;
 }
-.slide_count .img_wrapper {
-	filter: drop-shadow(0px 0px 6px #fff);
+
+.slide_count>span {
+	opacity: 0.1;
 }
+
 .slide_count span {
 	text-align: center;
 	font-family: "Noto Sans";
@@ -20,4 +24,8 @@
 	font-style: normal;
 	font-weight: 100;
 	letter-spacing: 2px;
+}
+
+.slide_count .img_wrapper {
+	opacity: 0.2;
 }
