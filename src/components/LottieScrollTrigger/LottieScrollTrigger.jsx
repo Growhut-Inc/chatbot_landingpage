@@ -13,29 +13,45 @@ function LottieScrollTrigger() {
 		[...Array(maxLength)].map(() => React.createRef())
 	);
 	const currentIndexRef = useRef(0);
+	const currentIndexDirection = useRef(1);
 	const isAnimating = useRef(false);
 
 	const loadAnimation = (index, direction) => {
-		const newAnimation = preloadedAnimations.current[index];
-		if (!newAnimation) return;
-		for (var i = 0; i < maxLength; i++) {
-			animationContainer.current[i].current.style.display = "none";
+		if (index < 0 || index >= maxLength) {
+			console.error("Index out of bounds:", index);
+			return;
 		}
-		animationContainer.current[index].current.style.display = "block";
 		if (direction === -1) {
+			const newAnimation = preloadedAnimations.current[index + 1];
+			if (!newAnimation) return;
 			newAnimation.goToAndStop(newAnimation.totalFrames - 1, true);
 			newAnimation.setDirection(-1);
+			newAnimation.play();
+			isAnimating.current = true;
+			currentIndexDirection.current = -1;
 		} else {
+			const newAnimation = preloadedAnimations.current[index];
+			if (!newAnimation) return;
+			for (var i = 0; i < maxLength; i++) {
+				animationContainer.current[i].current.style.display = "none";
+			}
+			animationContainer.current[index].current.style.display = "block";
 			newAnimation.goToAndStop(0, true);
 			newAnimation.setDirection(1);
+			newAnimation.play();
+			isAnimating.current = true;
+			currentIndexDirection.current = 1;
 		}
-		newAnimation.play();
-		isAnimating.current = true;
 	};
 
 	const handleScroll = (direction) => {
 		if (isAnimating.current) return;
 		let newIndex = currentIndexRef.current + direction;
+		if (newIndex < 0) {
+			newIndex = 0;
+		} else if (newIndex >= maxLength) {
+			newIndex = maxLength - 1;
+		}
 		console.log("newIndex", newIndex);
 		if (newIndex < -1 || newIndex >= maxLength) return;
 		isAnimating.current = true;
@@ -83,6 +99,16 @@ function LottieScrollTrigger() {
 							resolve(anim);
 						});
 						anim.addEventListener("complete", () => {
+							if (currentIndexDirection.current === -1) {
+								for (var i = 0; i < maxLength; i++) {
+									animationContainer.current[
+										i
+									].current.style.display = "none";
+								}
+								animationContainer.current[
+									currentIndexRef.current
+								].current.style.display = "block";
+							}
 							isAnimating.current = false;
 						});
 						preloadedAnimations.current.push(anim);
