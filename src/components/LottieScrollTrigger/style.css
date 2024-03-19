@@ -2,29 +2,15 @@ body {
     background-color: #080011;
 }
 
-.homepage_design {
+.homepage_design_dynamic {
     overflow: hidden;
     height: 100vh;
     width: 100vw;
     position: relative;
-    z-index: 0;
+    z-index: 2;
 }
 
-.homepage_design .bg_star {
-    width: 80%;
-    height: 80%;
-    background: radial-gradient(50% 50% at 50% 50%, #1A0733 0%, #080011 100%);
-    background-image: url("../../assets/images/start-bg.svg");
-    background-position: top center;
-    background-size: contain;
-    position: fixed;
-    z-index: 1;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.homepage_design .panel {
+.homepage_design_dynamic .panel {
     width: 100vw;
     height: 100vh;
     position: absolute;
@@ -34,7 +20,7 @@ body {
     display: flex;
 }
 
-.homepage_design .panel .icon_animation {
+.homepage_design_dynamic .panel .icon_animation {
     width: fit-content;
     height: 45vh;
     display: none;
@@ -44,7 +30,7 @@ body {
     transform: translate(-50%, -50%);
 }
 
-.homepage_design .content_wrapper {
+.homepage_design_dynamic .content_wrapper {
     position: absolute;
     width: 100%;
     height: 20%;
@@ -52,7 +38,7 @@ body {
     bottom: 100px;
 }
 
-.homepage_design .content_wrapper .text_wrapper {
+.homepage_design_dynamic .content_wrapper .text_wrapper {
     opacity: 0;
     max-width: calc(100% - 40%);
     text-align: center;
@@ -64,17 +50,17 @@ body {
     color: white;
 }
 
-.homepage_design .content_wrapper .text_wrapper.show {
+.homepage_design_dynamic .content_wrapper .text_wrapper.show {
     opacity: 0.5;
 }
 
-.homepage_design .content_wrapper .content1,
-.homepage_design .content_wrapper .content2,
-.homepage_design .content_wrapper .content3,
-.homepage_design .content_wrapper .content4,
-.homepage_design .content_wrapper .content5,
-.homepage_design .content_wrapper .content6,
-.homepage_design .content_wrapper .content7 {
+.homepage_design_dynamic .content_wrapper .content1,
+.homepage_design_dynamic .content_wrapper .content2,
+.homepage_design_dynamic .content_wrapper .content3,
+.homepage_design_dynamic .content_wrapper .content4,
+.homepage_design_dynamic .content_wrapper .content5,
+.homepage_design_dynamic .content_wrapper .content6,
+.homepage_design_dynamic .content_wrapper .content7 {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -85,27 +71,27 @@ body {
     align-items: center;
 }
 
-.homepage_design .content1 .text_wrapper .italic_text {
+.homepage_design_dynamic .content1 .text_wrapper .italic_text {
     font-size: 22px;
     font-style: italic;
     font-weight: 400;
     font-family: "Noto Sans";
 }
 
-.homepage_design .content1 .text_wrapper p {
+.homepage_design_dynamic .content1 .text_wrapper p {
     font-size: 17px;
     font-family: "Noto Sans";
     font-style: normal;
 }
 
-.homepage_design .text_wrapper h4 {
+.homepage_design_dynamic .text_wrapper h4 {
     font-size: 22px;
     font-weight: 400;
     font-family: "Monument Extended";
     font-style: normal;
 }
 
-.homepage_design .text_wrapper p {
+.homepage_design_dynamic .text_wrapper p {
     font-size: 17px;
     font-family: "Noto Sans";
     font-style: normal;

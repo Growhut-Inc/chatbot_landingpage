@@ -3,15 +3,15 @@ import React, { useRef, useEffect, useState } from "react";
 import lottie from "lottie-web";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Observer } from "gsap/Observer";
 import "./style.css";
 import SlideCounter from "../SlideCounter/SlideCounter";
 
-gsap.registerPlugin(ScrollTrigger, Observer);
+gsap.registerPlugin(ScrollTrigger);
 
-function LottieScrollTrigger() {
+function LottieScrollTrigger({ onLastSlide, newDirection }) {
 	const preloadedAnimations = useRef([]);
-	const maxLength = 8;
+	const maxLength = 3;
+	// const maxLength = 8;
 	const animationContainer = useRef(
 		[...Array(maxLength)].map(() => React.createRef())
 	);
@@ -56,38 +56,33 @@ function LottieScrollTrigger() {
 		} else if (newIndex >= maxLength) {
 			newIndex = maxLength - 1;
 		}
-		console.log("newIndex", newIndex);
 		if (newIndex < -1 || newIndex >= maxLength) return;
 		isAnimating.current = true;
 		currentIndexRef.current = newIndex;
 		setCurrentCount(newIndex + 1);
+		console.log(newIndex);
+		if (typeof onLastSlide === "function")
+			onLastSlide(newIndex + 1 === maxLength);
 		loadAnimation(currentIndexRef.current, direction);
 	};
 
-	const debounce = (func, wait) => {
-		let timeout;
-
-		return function executedFunction(...args) {
-			const later = () => {
-				clearTimeout(timeout);
-				func(...args);
-			};
-
-			clearTimeout(timeout);
-			timeout = setTimeout(later, wait);
-		};
-	};
-
-	const debouncedHandleScroll = debounce(handleScroll, 200);
+	useEffect(() => {
+		console.log("newDirection", newDirection);
+		if (newDirection === 1 || newDirection === -1)
+			handleScroll(newDirection);
+	}, [newDirection]);
 
 	useEffect(() => {
-		Observer.create({
-			type: "wheel,touch,pointer",
-			wheelSpeed: -1,
-			onDown: () => debouncedHandleScroll(-1),
-			onUp: () => debouncedHandleScroll(1),
-			tolerance: 10,
-		});
+		const homepageDesignDynamic = document.querySelector(
+			".homepage_design_dynamic"
+		);
+
+		if (!homepageDesignDynamic) {
+			console.error("Homepage design dynamic container not found");
+			return;
+		}
+		homepageDesignDynamic.style.overflowY = "auto";
+		homepageDesignDynamic.style.maxHeight = "100vh";
 
 		const animationPromises = animationContainer.current.map(
 			(ref, index) =>
@@ -200,8 +195,7 @@ function LottieScrollTrigger() {
 		</>,
 	];
 	return (
-		<div className="homepage_design">
-			<div className="bg_star"></div>
+		<div className="homepage_design_dynamic">
 			{Array.from({ length: maxLength }).map((_, i) => (
 				<div className="panel" key={i}>
 					<div
