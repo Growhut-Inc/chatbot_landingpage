@@ -252,7 +252,7 @@ function LottieScrollTrigger() {
 						</div>
 					))}
 				</div>
-				<div className="section chatbot">
+				<div className="section">
 					<ChatBot />
 				</div>
 				<div className="section">
