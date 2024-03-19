@@ -6,45 +6,65 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Observer } from "gsap/Observer";
 import "./style.css";
 import SlideCounter from "../SlideCounter/SlideCounter";
+import Footer from "../Footer/Footer";
+import ChatBot from "../ChatBot/ChatBot";
 
 gsap.registerPlugin(ScrollTrigger, Observer);
 
 function LottieScrollTrigger() {
 	const preloadedAnimations = useRef([]);
-	const maxLength = 8;
+	const maxLengthGSAP1 = 1;
+	const maxLength = maxLengthGSAP1 + 2;
 	const animationContainer = useRef(
-		[...Array(maxLength)].map(() => React.createRef())
+		[...Array(maxLengthGSAP1)].map(() => React.createRef())
 	);
 	const [currentCount, setCurrentCount] = useState(1);
 	const currentIndexRef = useRef(0);
 	const currentIndexDirection = useRef(1);
 	const isAnimating = useRef(false);
+	let sections = [];
 
 	const loadAnimation = (index, direction) => {
 		if (index < 0 || index >= maxLength) {
 			console.error("Index out of bounds:", index);
 			return;
 		}
-		if (direction === -1) {
-			const newAnimation = preloadedAnimations.current[index + 1];
-			if (!newAnimation) return;
-			newAnimation.goToAndStop(newAnimation.totalFrames - 1, true);
-			newAnimation.setDirection(-1);
-			newAnimation.play();
-			isAnimating.current = true;
-			currentIndexDirection.current = -1;
-		} else {
-			const newAnimation = preloadedAnimations.current[index];
-			if (!newAnimation) return;
-			for (var i = 0; i < maxLength; i++) {
-				animationContainer.current[i].current.style.display = "none";
+		if (index < maxLengthGSAP1) {
+			if (index === maxLengthGSAP1 - 1 && direction === -1) {
+				sections.forEach((a) => gsap.to(a, { duration: 1, y: 0 }));
+				isAnimating.current = false;
+			} else {
+				if (direction === -1) {
+					const newAnimation = preloadedAnimations.current[index + 1];
+					if (!newAnimation) return;
+					newAnimation.goToAndStop(
+						newAnimation.totalFrames - 1,
+						true
+					);
+					newAnimation.setDirection(-1);
+					newAnimation.play();
+					isAnimating.current = true;
+					currentIndexDirection.current = -1;
+				} else {
+					const newAnimation = preloadedAnimations.current[index];
+					if (!newAnimation) return;
+					for (var i = 0; i < maxLengthGSAP1; i++) {
+						animationContainer.current[i].current.style.display =
+							"none";
+					}
+					animationContainer.current[index].current.style.display =
+						"block";
+					newAnimation.goToAndStop(0, true);
+					newAnimation.setDirection(1);
+					newAnimation.play();
+					isAnimating.current = true;
+					currentIndexDirection.current = 1;
+				}
 			}
-			animationContainer.current[index].current.style.display = "block";
-			newAnimation.goToAndStop(0, true);
-			newAnimation.setDirection(1);
-			newAnimation.play();
-			isAnimating.current = true;
-			currentIndexDirection.current = 1;
+		} else {
+			const targetY = -sections[index - maxLengthGSAP1 + 1].offsetTop;
+			sections.forEach((a) => gsap.to(a, { duration: 1, y: targetY }));
+			isAnimating.current = false;
 		}
 	};
 
@@ -53,14 +73,16 @@ function LottieScrollTrigger() {
 		let newIndex = currentIndexRef.current + direction;
 		if (newIndex < 0) {
 			newIndex = 0;
+			// } else if (newIndex >= maxLengthGSAP1) {
+			// 	newIndex = maxLengthGSAP1 - 1;
 		} else if (newIndex >= maxLength) {
 			newIndex = maxLength - 1;
 		}
-		console.log("newIndex", newIndex);
+		// if (newIndex < -1 || newIndex >= maxLengthGSAP1) return;
 		if (newIndex < -1 || newIndex >= maxLength) return;
 		isAnimating.current = true;
 		currentIndexRef.current = newIndex;
-		setCurrentCount(newIndex + 1);
+		if (newIndex < maxLengthGSAP1) setCurrentCount(newIndex + 1);
 		loadAnimation(currentIndexRef.current, direction);
 	};
 
@@ -81,6 +103,7 @@ function LottieScrollTrigger() {
 	const debouncedHandleScroll = debounce(handleScroll, 200);
 
 	useEffect(() => {
+		sections = document.querySelectorAll(".section");
 		Observer.create({
 			type: "wheel,touch,pointer",
 			wheelSpeed: -1,
@@ -105,7 +128,7 @@ function LottieScrollTrigger() {
 						});
 						anim.addEventListener("complete", () => {
 							if (currentIndexDirection.current === -1) {
-								for (var i = 0; i < maxLength; i++) {
+								for (var i = 0; i < maxLengthGSAP1; i++) {
 									animationContainer.current[
 										i
 									].current.style.display = "none";
@@ -202,26 +225,40 @@ function LottieScrollTrigger() {
 	return (
 		<div className="homepage_design">
 			<div className="bg_star"></div>
-			{Array.from({ length: maxLength }).map((_, i) => (
-				<div className="panel" key={i}>
-					<div
-						ref={animationContainer.current[i]}
-						className="icon_animation"
-					/>
-					<div className="content_wrapper">
-						<div className="content1">
+			<div className="sections">
+				<div className="section">
+					{Array.from({ length: maxLengthGSAP1 }).map((_, i) => (
+						<div className="panel" key={i}>
 							<div
-								className={`text_wrapper ${
-									i === currentCount - 1 ? "show" : "hide"
-								}`}
-							>
-								{content[i]}
+								ref={animationContainer.current[i]}
+								className="icon_animation"
+							/>
+							<div className="content_wrapper">
+								<div className="content1">
+									<div
+										className={`text_wrapper ${
+											i === currentCount - 1
+												? "show"
+												: "hide"
+										}`}
+									>
+										{content[i]}
+									</div>
+								</div>
 							</div>
+							<SlideCounter
+								count={`${currentCount}/${maxLengthGSAP1}`}
+							/>
 						</div>
-					</div>
-					<SlideCounter count={`${currentCount}/${maxLength}`} />
+					))}
 				</div>
-			))}
+				<div className="section">
+					<ChatBot />
+				</div>
+				<div className="section">
+					<Footer />
+				</div>
+			</div>
 		</div>
 	);
 }

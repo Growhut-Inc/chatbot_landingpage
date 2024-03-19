@@ -14,7 +14,7 @@
 }
 
 .slide_count>span {
-	opacity: 0.1;
+	opacity: 0.8;
 }
 
 .slide_count span {
@@ -27,5 +27,5 @@
 }
 
 .slide_count .img_wrapper {
-	opacity: 0.2;
+	opacity: 0.6;
 }

@@ -186,7 +186,7 @@ const ChatBot = () => {
 
 	return (
 		<section className="panel chatbot_wrapper">
-			<div className="bg_star"></div>
+			{/* <div className="bg_star"></div> */}
 			<h2>Experience it for yourself!</h2>
 			<div className="chatbot_container">
 				<div className="icon_left">

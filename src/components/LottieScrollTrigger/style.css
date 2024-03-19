@@ -113,3 +113,18 @@ body {
     line-height: 160%;
     /* 38.4px */
 }
+
+.homepage_design .sections {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    z-index: 2;
+    position: relative;
+}
+
+.homepage_design .section {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
