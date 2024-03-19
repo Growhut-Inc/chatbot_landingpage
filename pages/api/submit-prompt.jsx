@@ -29,7 +29,8 @@ const submitPrompt = async (req, res) => {
 
 		try {
 			fetch(
-				`https://mu8bio7fq9.execute-api.ap-south-1.amazonaws.com/default/GrowHut_Dashboard_OpenAI_Chat?chat_id=${chatId}`,
+				// `https://mu8bio7fq9.execute-api.ap-south-1.amazonaws.com/default/GrowHut_Dashboard_OpenAI_Chat?chat_id=${chatId}`,
+				`https://5by6agyet1.execute-api.ap-south-1.amazonaws.com/default/GrowHut_Dashboard_MistralAI_Chat?chat_id=${chatId}`,
 				{
 					method: "POST",
 					headers: {

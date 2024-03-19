@@ -68,17 +68,17 @@ function LottieScrollTrigger() {
 		}
 	};
 
-	const handleScroll = (direction) => {
+	const handleScroll = (e, direction) => {
+		if (e?.event?.target?.closest(".chatbot") !== null) {
+			return;
+		}
 		if (isAnimating.current) return;
 		let newIndex = currentIndexRef.current + direction;
 		if (newIndex < 0) {
 			newIndex = 0;
-			// } else if (newIndex >= maxLengthGSAP1) {
-			// 	newIndex = maxLengthGSAP1 - 1;
 		} else if (newIndex >= maxLength) {
 			newIndex = maxLength - 1;
 		}
-		// if (newIndex < -1 || newIndex >= maxLengthGSAP1) return;
 		if (newIndex < -1 || newIndex >= maxLength) return;
 		isAnimating.current = true;
 		currentIndexRef.current = newIndex;
@@ -107,8 +107,8 @@ function LottieScrollTrigger() {
 		Observer.create({
 			type: "wheel,touch,pointer",
 			wheelSpeed: -1,
-			onDown: () => debouncedHandleScroll(-1),
-			onUp: () => debouncedHandleScroll(1),
+			onDown: (e) => debouncedHandleScroll(e, -1),
+			onUp: (e) => debouncedHandleScroll(e, 1),
 			tolerance: 10,
 		});
 
@@ -252,7 +252,7 @@ function LottieScrollTrigger() {
 						</div>
 					))}
 				</div>
-				<div className="section">
+				<div className="section chatbot">
 					<ChatBot />
 				</div>
 				<div className="section">
