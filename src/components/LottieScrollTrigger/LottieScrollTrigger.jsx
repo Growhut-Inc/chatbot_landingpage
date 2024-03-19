@@ -13,7 +13,7 @@ gsap.registerPlugin(ScrollTrigger, Observer);
 
 function LottieScrollTrigger() {
 	const preloadedAnimations = useRef([]);
-	const maxLengthGSAP1 = 1;
+	const maxLengthGSAP1 = 7;
 	const maxLength = maxLengthGSAP1 + 2;
 	const animationContainer = useRef(
 		[...Array(maxLengthGSAP1)].map(() => React.createRef())
