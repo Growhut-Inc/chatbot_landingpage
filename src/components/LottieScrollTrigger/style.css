@@ -35,7 +35,7 @@ body {
 }
 
 .homepage_design .panel .icon_animation {
-    width: fit-content;
+    width: 100%;
     height: 45vh;
     display: none;
     position: absolute;
@@ -65,7 +65,7 @@ body {
 }
 
 .homepage_design .content_wrapper .text_wrapper.show {
-    opacity: 0.5;
+    opacity: 1;
 }
 
 .homepage_design .content_wrapper .content1,
@@ -127,4 +127,34 @@ body {
     height: 100vh;
     overflow: hidden;
     position: relative;
+}
+
+@media only screen and (max-width: 768px) {
+    .homepage_design .panel .icon_animation {
+        height: 60vh;
+    }
+
+    .homepage_design .text_wrapper h4 {
+        font-size: 18px;
+    }
+
+    .homepage_design .content1 .text_wrapper .italic_text {
+        font-size: 16px;
+    }
+
+    .homepage_design .content1 .text_wrapper p {
+        font-size: 16px;
+    }
+
+    .homepage_design .content1 .text_wrapper p.name {
+        font-size: 18px;
+    }
+
+    .homepage_design .content_wrapper .text_wrapper {
+        max-width: 85%;
+    }
+
+    .homepage_design .content_wrapper {
+        bottom: 120px;
+    }
 }

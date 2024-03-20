@@ -169,7 +169,7 @@ function LottieScrollTrigger() {
 				So close, in fact, that you tell them what they need well before
 				they realize it themselves."
 			</span>
-			<p>- Steve Jobs</p>
+			<p className="name">- Steve Jobs</p>
 		</>,
 		<>
 			<h4>Every business owner knows the dance.</h4>

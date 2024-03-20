@@ -205,12 +205,14 @@ const ChatBot = () => {
 							width={50}
 							height={0}
 							alt="icon"
+							className={isWaitForBotMessage ? "bounce_img" : ""}
 						/>
 						<Image
 							src={rightIcon}
 							width={50}
 							height={0}
 							alt="icon"
+							className={!isWaitForBotMessage ? "bounce_img" : ""}
 						/>
 					</div>
 					<div className="messages" ref={myDivRef}>

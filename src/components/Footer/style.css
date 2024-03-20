@@ -140,7 +140,11 @@
 	font-size: 13px;
 }
 
-@media only screen and (max-width: 769px) {
+@media only screen and (max-width: 768px) {
+	.footer_section_wrapper .arrow_up {
+		opacity: 0;
+	}
+
 	.footer_section_wrapper {
 		padding: 0 1rem 2rem 1rem;
 	}
@@ -161,6 +165,10 @@
 
 	.footer_section_wrapper .footer .link {
 		font-size: 15px;
+	}
+
+	.footer_section_wrapper .footer .sm_text {
+		margin-bottom: 0;
 	}
 }
 
