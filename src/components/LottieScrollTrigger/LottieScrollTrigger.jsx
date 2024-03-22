@@ -81,7 +81,6 @@ function LottieScrollTrigger() {
 		} else if (newIndex >= maxLength) {
 			newIndex = maxLength - 1;
 		}
-		console.log(newIndex);
 		if (newIndex < -1 || newIndex >= maxLength) return;
 		isAnimating.current = true;
 		currentIndexRef.current = newIndex;
