@@ -6,7 +6,7 @@ const sendDataToWS = (data) => {
 	try {
 		const dev = process.env.NODE_ENV === "development";
 		const ws_url = `${dev ? "ws" : "wss"}://${
-			dev ? "localhost:3000" : "growhut-chatbot-landingpage.vercel.app"
+			dev ? "localhost:3000" : "chatbot.growhut.in"
 		}/ws`;
 		const ws = new WebSocket(ws_url);
 		ws.on("open", () => {

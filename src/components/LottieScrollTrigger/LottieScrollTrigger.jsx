@@ -26,6 +26,11 @@ function LottieScrollTrigger() {
 	const isAnimating = useRef(false);
 	let sections = [];
 
+	const scrollToBottom = () => {
+		currentIndexRef.current = maxLengthGSAP1 - 1;
+		handleScroll(null, 1);
+	};
+
 	const loadAnimation = (index, direction) => {
 		if (index < 0 || index >= maxLength) {
 			console.error("Index out of bounds:", index);
@@ -71,7 +76,7 @@ function LottieScrollTrigger() {
 	};
 
 	const handleScroll = (e, direction) => {
-		if (e?.event?.target?.closest(".chatbot") !== null) {
+		if ((e?.event?.target?.closest(".chatbot") || null) !== null) {
 			return;
 		}
 		if (isAnimating.current) return;
@@ -252,6 +257,7 @@ function LottieScrollTrigger() {
 							</div>
 							<SlideCounter
 								count={`${currentCount}/${maxLengthGSAP1}`}
+								scrollToBottom={scrollToBottom}
 							/>
 						</div>
 					))}
