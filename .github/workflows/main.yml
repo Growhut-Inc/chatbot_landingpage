@@ -1,0 +1,50 @@
+name: Deploy to EC2
+
+on:
+    push:
+        branches:
+            - main
+
+env:
+    EC2_HOST: 3.6.40.218
+    EC2_USERNAME: ubuntu
+    MONGODB_URI: mongodb+srv://tech:K6HyN44VhHUF3ChZ@staging.fhxjtgt.mongodb.net/growhut-chatbot?retryWrites=true&w=majority
+    NODE_ENV: production
+
+jobs:
+    deploy:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v2
+
+            - name: make .env
+              run: |
+                  echo "MONGODB_URI=${{env.MONGODB_URI}}" >> .env
+                  echo "NODE_ENV=${{env.NODE_ENV}}" >> .env
+
+            - name: Set permission to key
+              run: sudo chmod 400 keys/growhut.pem
+
+            - name: Delete existing build files
+              run: |
+                  ssh -i keys/growhut.pem -o "StrictHostKeyChecking=no" ${{ env.EC2_USERNAME }}@${{ env.EC2_HOST }} << 'ENDSSH'
+                  pm2 stop growhut-chatbot
+                  pm2 save
+                  sudo rm -rf /var/www/growhut-chatbot
+                  sudo mkdir -p /var/www/growhut-chatbot
+                  sudo chown ubuntu:ubuntu /var/www/growhut-chatbot
+                  ENDSSH
+
+            - name: Copy build files to EC2 instance
+              run: sudo scp -i keys/growhut.pem -o "StrictHostKeyChecking=no" -v -r ./* .env ${{ env.EC2_USERNAME }}@${{ env.EC2_HOST }}:/var/www/growhut-chatbot
+
+            - name: SSH into EC2 and deploy
+              run: |
+                  ssh -i keys/growhut.pem -o "StrictHostKeyChecking=no" ${{ env.EC2_USERNAME }}@${{ env.EC2_HOST }} << 'ENDSSH'
+                  cd /var/www/growhut-chatbot
+                  sudo npm install
+                  npm run build
+                  pm2 start /var/www/growhut-chatbot/ecosystem.config.cjs || pm2 restart growhut-chatbot
+                  pm2 save
+                  ENDSSH
