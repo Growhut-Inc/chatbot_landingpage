@@ -15,6 +15,7 @@
 		"@wcj/markdown-to-html": "^3.0.2",
 		"dotenv": "^16.4.5",
 		"gsap": "^3.12.5",
+		"is-mobile": "^4.0.0",
 		"lottie-web": "^5.12.2",
 		"mongoose": "^8.2.1",
 		"next": "^14.1.3",

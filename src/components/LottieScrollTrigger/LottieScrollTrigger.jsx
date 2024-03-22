@@ -8,10 +8,12 @@ import "./style.css";
 import SlideCounter from "../SlideCounter/SlideCounter";
 import Footer from "../Footer/Footer";
 import ChatBot from "../ChatBot/ChatBot";
+import isMobile from "is-mobile";
 
 gsap.registerPlugin(ScrollTrigger, Observer);
 
 function LottieScrollTrigger() {
+	const is_mobile = isMobile();
 	const preloadedAnimations = useRef([]);
 	const maxLengthGSAP1 = 7;
 	const maxLength = maxLengthGSAP1 + 2;
@@ -79,6 +81,7 @@ function LottieScrollTrigger() {
 		} else if (newIndex >= maxLength) {
 			newIndex = maxLength - 1;
 		}
+		console.log(newIndex);
 		if (newIndex < -1 || newIndex >= maxLength) return;
 		isAnimating.current = true;
 		currentIndexRef.current = newIndex;
@@ -107,8 +110,8 @@ function LottieScrollTrigger() {
 		Observer.create({
 			type: "wheel,touch,pointer",
 			wheelSpeed: -1,
-			onDown: (e) => debouncedHandleScroll(e, -1),
-			onUp: (e) => debouncedHandleScroll(e, 1),
+			onDown: (e) => !isAnimating.current && debouncedHandleScroll(e, -1),
+			onUp: (e) => !isAnimating.current && debouncedHandleScroll(e, 1),
 			tolerance: 10,
 		});
 
@@ -121,7 +124,9 @@ function LottieScrollTrigger() {
 							renderer: "svg",
 							loop: false,
 							autoplay: false,
-							path: `/animations/lottie${index + 1}.json`,
+							path: `/animations/${
+								is_mobile ? "mobile/" : ""
+							}lottie${index + 1}.json`,
 						});
 						anim.addEventListener("DOMLoaded", () => {
 							resolve(anim);
